@@ -6,18 +6,22 @@ public class TexturePainterRed : MonoBehaviour
 {
     public GameObject brushCursor, brushContainer, brushContainer2;
     public Camera sceneCamera, canvasCam, canvasCam2;
-    public RenderTexture canvasTexture;
+    public RenderTexture canvasTexture, canvasTexture2;
     public Material baseMaterial;
+    public Material baseMaterial2;
     float brushSize = 1.0f;
     Color brushColor;
-    int brushCounter = 0, MAX_BRUSH_COUNT = 1000;
+    int brushCounter = 0, MAX_BRUSH_COUNT = 10;
     bool saving = false;
 
-    public GameObject nozzle;
+   public GameObject nozzle;
+    public GameObject paticle;
     bool Yesquad = false;
-
+  
     void Update()
     {
+        nozzle = GameObject.Find("ButtonRed");
+        paticle = GameObject.Find("WhiteSmokeRed"); 
         brushColor = Color.red;
         if (Input.GetMouseButton(0))
         {
@@ -67,7 +71,7 @@ public class TexturePainterRed : MonoBehaviour
             brushCursor.SetActive(false);
             saving = true;
             Invoke("SaveTexture", 0.1f);
-
+            Invoke("SaveTexture2", 0.1f);
         }
     }
     void UpdateBrushCursor()
@@ -86,7 +90,6 @@ public class TexturePainterRed : MonoBehaviour
             brushCursor.SetActive(false);
         }
     }
-    public GameObject paticle;
     public bool rayOn;
     RaycastHit hit;
 
@@ -146,22 +149,86 @@ public class TexturePainterRed : MonoBehaviour
         }
 
     }
+    //포톤용
     void SaveTexture()
     {
         brushCounter = 0;
         System.DateTime date = System.DateTime.Now;
         RenderTexture.active = canvasTexture;
-        Texture2D tex = new Texture2D(canvasTexture.width, canvasTexture.height, TextureFormat.RGB24, false);
+        Texture2D tex = new Texture2D(canvasTexture.width, canvasTexture.height, TextureFormat.ARGB32, false);
         tex.ReadPixels(new Rect(0, 0, canvasTexture.width, canvasTexture.height), 0, 0);
         tex.Apply();
         RenderTexture.active = null;
-        baseMaterial.mainTexture = tex;
+
+        var bytes = tex.EncodeToPNG();
+        TextureShare.instance.TextureSharing(bytes);
+
+        //baseMaterial.mainTexture = tex;
         foreach (Transform child in brushContainer.transform)
         {
             Destroy(child.gameObject);
         }
         Invoke("ShowCursor", 0.1f);
     }
+    //void SaveTexture()
+    //{
+    //    brushCounter = 0;
+    //    System.DateTime date = System.DateTime.Now;
+    //    RenderTexture.active = canvasTexture;
+    //    Texture2D tex = new Texture2D(canvasTexture.width, canvasTexture.height, TextureFormat.RGB24, false);
+    //    tex.ReadPixels(new Rect(0, 0, canvasTexture.width, canvasTexture.height), 0, 0);
+    //    tex.Apply();
+    //    RenderTexture.active = null;
+    //    baseMaterial.mainTexture = tex;
+
+
+    //    foreach (Transform child in brushContainer.transform)
+    //    {
+    //        Destroy(child.gameObject);
+    //    }
+
+    //    Invoke("ShowCursor", 0.1f);
+    //}
+
+    void SaveTexture2()
+    {
+        brushCounter = 0;
+        System.DateTime date = System.DateTime.Now;
+        RenderTexture.active = canvasTexture2;
+        Texture2D tex = new Texture2D(canvasTexture2.width, canvasTexture2.height, TextureFormat.ARGB32, false);
+        tex.ReadPixels(new Rect(0, 0, canvasTexture2.width, canvasTexture2.height), 0, 0);
+        tex.Apply();
+        RenderTexture.active = null;
+
+        var bytes = tex.EncodeToPNG();
+        TextureShare.instance.TextureSharing2(bytes);
+
+        //baseMaterial.mainTexture = tex;
+        foreach (Transform child in brushContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        Invoke("ShowCursor", 0.1f);
+    }
+    //void SaveTexture2()
+    //{
+    //    brushCounter = 0;
+    //    System.DateTime date = System.DateTime.Now;
+    //    RenderTexture.active = canvasTexture2;
+    //    Texture2D tex = new Texture2D(canvasTexture2.width, canvasTexture2.height, TextureFormat.RGB24, false);
+    //    tex.ReadPixels(new Rect(0, 0, canvasTexture2.width, canvasTexture2.height), 0, 0);
+    //    tex.Apply();
+    //    RenderTexture.active = null;
+    //    baseMaterial2.mainTexture = tex;
+
+
+    //    foreach (Transform child in brushContainer2.transform)
+    //    {
+    //        Destroy(child.gameObject);
+    //    }
+    //    Invoke("ShowCursor", 0.1f);
+
+    //}
     void ShowCursor()
     {
         saving = false;

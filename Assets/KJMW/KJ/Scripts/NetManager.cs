@@ -12,14 +12,13 @@ public class NetManager : MonoBehaviourPunCallbacks
 
     PhotonView pv;
 
-    public Player m_player;
-
-    public InputField m_colorR;
-    public InputField m_colorG;
-    public InputField m_colorB;
+    //public InputField m_colorR;
+    //public InputField m_colorG;
+    //public InputField m_colorB;
 
     void Start()
     {
+
         pv = GetComponent<PhotonView>();
         PhotonNetwork.GameVersion = ver;
         PhotonNetwork.ConnectUsingSettings();
@@ -56,14 +55,16 @@ public class NetManager : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         print("joinedroom");
 
-        //if (PhotonNetwork.IsMasterClient)//방장일때
-        //{
-          m_player = PhotonNetwork.Instantiate("Player", new Vector3(0, 0, -2), Quaternion.identity).GetComponent<Player>(); 
-        //}
-        //else
-        //{
-        //    PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), Quaternion.identity);
-        //}
+        if (PhotonNetwork.IsMasterClient)//방장일때
+        {
+            //PhotonNetwork.Instantiate("WhaleModel", new Vector3(0.96f, -0.23f, 4.02f), Quaternion.identity);//.GetComponent<Player>();
+            PhotonNetwork.Instantiate("Can", new Vector3(0, 0, 2.93f), Quaternion.identity);
+
+        }
+        else
+        {
+            PhotonNetwork.Instantiate("Can", new Vector3(1, 0, 2.93f), Quaternion.identity);
+        }
     }
 
 
@@ -75,12 +76,6 @@ public class NetManager : MonoBehaviourPunCallbacks
         print("방나감");
     }
 
-    public void OnChangeColor()
-    {
-        var valueR = float.Parse(m_colorR.text);
-        var valueG = float.Parse(m_colorG.text);
-        var valueB = float.Parse(m_colorB.text);
-        m_player.setColor(valueR, valueG, valueB);
-    }
+
 }
 
