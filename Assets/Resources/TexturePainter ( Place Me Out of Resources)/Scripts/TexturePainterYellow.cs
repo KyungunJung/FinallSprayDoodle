@@ -20,7 +20,7 @@ public class TexturePainterYellow : MonoBehaviour
     void Update()
     {
         nozzle = GameObject.Find("ButtonYellow");
-        paticle = GameObject.Find("WhiteSmokeYellow");
+        paticle = GameObject.Find("Yellow").transform.GetChild(0).gameObject;
         brushColor = Color.yellow;
         if (Input.GetMouseButton(0))
         {

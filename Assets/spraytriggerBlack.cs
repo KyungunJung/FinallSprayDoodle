@@ -10,6 +10,7 @@ public class spraytriggerBlack : MonoBehaviour
     
     void Start()
     {
+        texture = GameObject.Find("TexturePainterBlack");
         Tp = texture.GetComponent<TexturePainterBlack>();
         ad = gameObject.GetComponent<AudioSource>();
         move = gameObject.transform.position;

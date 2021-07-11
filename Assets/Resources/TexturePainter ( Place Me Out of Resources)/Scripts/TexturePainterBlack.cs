@@ -20,7 +20,7 @@ public class TexturePainterBlack : MonoBehaviour
     void Update()
     {
         nozzle = GameObject.Find("ButtonBlack");
-        paticle = GameObject.Find("WhiteSmokeBlack");
+        paticle = GameObject.Find("Black").transform.GetChild(0).gameObject;
         brushColor = Color.black;
         if (Input.GetMouseButton(0))
         {

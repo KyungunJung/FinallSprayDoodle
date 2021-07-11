@@ -10,6 +10,7 @@ public class spraytriggerWhite : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        texture = GameObject.Find("TexturePainterWhite");
         Tp = texture.GetComponent<TexturePainterWhite>();
         ad = gameObject.GetComponent<AudioSource>();
         move = gameObject.transform.position;

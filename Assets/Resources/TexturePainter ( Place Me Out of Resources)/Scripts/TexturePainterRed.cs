@@ -21,7 +21,7 @@ public class TexturePainterRed : MonoBehaviour
     void Update()
     {
         nozzle = GameObject.Find("ButtonRed");
-        paticle = GameObject.Find("WhiteSmokeRed"); 
+        paticle = GameObject.Find("Red").transform.GetChild(0).gameObject;
         brushColor = Color.red;
         if (Input.GetMouseButton(0))
         {

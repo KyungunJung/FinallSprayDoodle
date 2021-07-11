@@ -20,7 +20,7 @@ public class TexturePainterBlue : MonoBehaviour
     void Update()
     {
         nozzle = GameObject.Find("ButtonBlue");
-        paticle = GameObject.Find("WhiteSmokeBlue");
+        paticle = GameObject.Find("Blue").transform.GetChild(0).gameObject;
         brushColor = Color.blue;
         if (Input.GetMouseButton(0))
         {

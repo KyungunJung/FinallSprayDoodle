@@ -21,7 +21,7 @@ public class TexturePainterWhite : MonoBehaviour
     void Update()
     {
         nozzle = GameObject.Find("ButtonWhite");
-        paticle = GameObject.Find("WhiteSmokeWhite");
+        paticle = GameObject.Find("White").transform.GetChild(0).gameObject;
         brushColor = Color.white;
         if (Input.GetMouseButton(0))
         {
