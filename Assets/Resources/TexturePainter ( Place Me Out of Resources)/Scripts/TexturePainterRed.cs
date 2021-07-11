@@ -38,7 +38,6 @@ public class TexturePainterRed : MonoBehaviour
 
     public void DoAction()
     {
-
         if (saving)
             return;
         Vector3 uvWorldPosition = Vector3.zero;
@@ -46,7 +45,6 @@ public class TexturePainterRed : MonoBehaviour
         if (HitTestUVPosition(ref uvWorldPosition, ref uvWorldPosition2))
         {
             GameObject brushObj;
-
             brushObj = (GameObject)Instantiate(Resources.Load("TexturePainter-Instances/BrushEntity"));
             brushObj.GetComponent<SpriteRenderer>().color = brushColor;
             brushColor.a = brushSize * 2.0f;
@@ -62,9 +60,7 @@ public class TexturePainterRed : MonoBehaviour
                 brushObj.transform.localPosition = uvWorldPosition2;
                 brushObj.transform.localScale = Vector3.one * brushSize;
             }
-
         }
-
         brushCounter++;
         if (brushCounter >= MAX_BRUSH_COUNT)
         {
@@ -113,6 +109,7 @@ public class TexturePainterRed : MonoBehaviour
             MeshCollider meshCollider = hit.collider as MeshCollider;
             if (meshCollider == null || meshCollider.sharedMesh == null)
                 return false;
+
             if (Yesquad == true)
             {
                 Vector2 pixelUV = new Vector2(hit.textureCoord.x, hit.textureCoord.y);
@@ -124,7 +121,6 @@ public class TexturePainterRed : MonoBehaviour
 
                 rayOn = true;
 
-                print("레이온");
                 return true;
             }
             else
@@ -139,7 +135,6 @@ public class TexturePainterRed : MonoBehaviour
 
                 rayOn = true;
 
-                print("레이온");
                 return true;
             }
         }

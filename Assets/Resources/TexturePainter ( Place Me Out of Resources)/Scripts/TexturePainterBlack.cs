@@ -124,7 +124,6 @@ public class TexturePainterBlack : MonoBehaviour
 
                 rayOn = true;
 
-                print("레이온");
                 return true;
             }
             else
@@ -139,14 +138,12 @@ public class TexturePainterBlack : MonoBehaviour
 
                 rayOn = true;
 
-                print("레이온");
                 return true;
             }
         }
         else
         {
             rayOn = false;
-            print("레이오프");
             return false;
         }
 
